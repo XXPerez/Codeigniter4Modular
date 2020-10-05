@@ -33,7 +33,7 @@ The user guide corresponding to this version of the framework can be found
 ## Installation & updates
 
 ```sh
-composer create-project xxperez/codeigniter4-modular codeigniter4-modular
+composer create-project xxperez/codeigniter4-modular
 ```
 then 
 ```sh
@@ -63,8 +63,7 @@ database.default.DBDriver = MySQLi
 database.default.port = 3306
 ```
 
-After database configuration, check migrations to ensure the table users are created:
-Run : 
+After database configuration, run migrate to ensure the table users are created:
 ```sh
 php spark migrate
 ```
