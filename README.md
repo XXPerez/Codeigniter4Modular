@@ -41,10 +41,24 @@ to your `app` folder. The affected files can be copied or merged from
 
 ## Setup
 
+Go to codeigniter4-modular directory.
 Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+and default database settings:
+
+app.baseURL = 'http://localhost'
+
+database.default.hostname = localhost
+database.default.database = database
+database.default.username = username
+database.default.password = password
+database.default.DBDriver = MySQLi
+database.default.port = 3306
+
+After database configuration, check migrations to ensure the table users are created:
+Run : 'php spark migrate'
 
 ## Modular configuration
+
 
 
 
