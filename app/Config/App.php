@@ -21,7 +21,7 @@ class App extends BaseConfig
 	| environments.
 	|
 	*/
-	public $baseURL = 'http://workspace.local/CodeIgniter4/CI4DEV/public/';
+	public $baseURL = '';
 
 	/*
 	|--------------------------------------------------------------------------
