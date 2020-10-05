@@ -37,6 +37,7 @@ composer create-project xxperez/codeigniter4-modular codeigniter4-modular
 ```
 then 
 ```sh
+cd codeigniter4-modular
 composer update
 ``` 
 whenever there is a new release of the framework.
