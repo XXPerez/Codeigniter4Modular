@@ -32,7 +32,7 @@ The user guide corresponding to this version of the framework can be found
 
 ## Installation & updates
 
-`composer create-project XXPerez/Codeigniter4-modular` then `composer update` whenever
+`composer create-project xxperez/codeigniter4-modular codeigniter4-modular` then `composer update` whenever
 there is a new release of the framework.
 
 When updating, check the release notes to see if there are any changes you might need to apply
@@ -43,6 +43,10 @@ to your `app` folder. The affected files can be copied or merged from
 
 Copy `env` to `.env` and tailor for your app, specifically the baseURL
 and any database settings.
+
+## Modular configuration
+
+
 
 ## Important Change with index.php
 
@@ -79,5 +83,4 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 - [mysqlnd](http://php.net/manual/en/mysqlnd.install.php)
 - xml (enabled by default - don't turn it off)
 
-## Modular configuration
 
