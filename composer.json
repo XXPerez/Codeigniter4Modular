@@ -1,13 +1,12 @@
 {
-	"name": "codeigniter4/appstarter",
+	"name": "XXPerez/Codeigniter4-modular",
 	"type": "project",
-	"description": "CodeIgniter4 starter app",
+	"description": "CodeIgniter4 modular starter app",
 	"homepage": "https://codeigniter.com",
 	"license": "MIT",
 	"require": {
 		"php": ">=7.2",
-		"codeigniter4/framework": "^4",
-		"benedmunds/codeigniter-ion-auth": "4.x-dev"
+		"codeigniter4/framework": "^4"
 	},
 	"require-dev": {
 		"fzaninotto/faker": "^1.9@dev",
@@ -29,12 +28,5 @@
 		"forum": "http://forum.codeigniter.com/",
 		"source": "https://github.com/codeigniter4/CodeIgniter4",
 		"slack": "https://codeigniterchat.slack.com"
-	},
-	"minimum-stability": "dev",
-	"repositories": {
-		"ionAuth": {
-			"type": "vcs",
-			"url": "git@github.com:benedmunds/CodeIgniter-Ion-Auth.git"
-		}
 	}
 }

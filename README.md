@@ -21,7 +21,7 @@ The modular structure allows to separate each module from other, having each one
 | app/ | Modules/ | Users/ | Validation/ | 
 | app/ | Modules/ | Users/ | Views/ | 
 
-This repository holds a composer-installable app starter.
+This repository holds a composer-installable app starter, with jQuery, Bootstrap4, and Login/Register fully working module examples
 It has been built from the 
 [development repository](https://github.com/codeigniter4/CodeIgniter4).
 
@@ -32,7 +32,7 @@ The user guide corresponding to this version of the framework can be found
 
 ## Installation & updates
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
+`composer create-project XXPerez/Codeigniter4-modular` then `composer update` whenever
 there is a new release of the framework.
 
 When updating, check the release notes to see if there are any changes you might need to apply
@@ -78,3 +78,6 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 - [mbstring](http://php.net/manual/en/mbstring.installation.php)
 - [mysqlnd](http://php.net/manual/en/mysqlnd.install.php)
 - xml (enabled by default - don't turn it off)
+
+## Modular configuration
+
