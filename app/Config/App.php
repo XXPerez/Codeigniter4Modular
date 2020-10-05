@@ -63,7 +63,7 @@ class App extends BaseConfig
 	| should run under for this request.
 	|
 	*/
-	public $defaultLocale = 'es';
+	public $defaultLocale = 'en';
 
 	/*
 	|--------------------------------------------------------------------------
@@ -76,7 +76,7 @@ class App extends BaseConfig
 	| If false, no automatic detection will be performed.
 	|
 	*/
-	public $negotiateLocale = false;
+	public $negotiateLocale = true;
 
 	/*
 	|--------------------------------------------------------------------------
@@ -88,7 +88,7 @@ class App extends BaseConfig
 	| found, the first locale will be used.
 	|
 	*/
-	public $supportedLocales = ['es','en'];
+	public $supportedLocales = ['en'];
 
 	/*
 	|--------------------------------------------------------------------------
@@ -99,7 +99,7 @@ class App extends BaseConfig
 	| dates with the date helper, and can be retrieved through app_timezone()
 	|
 	*/
-	public $appTimezone = 'Europe/Madrid';
+	public $appTimezone = 'America/Chicago';
 
 	/*
 	|--------------------------------------------------------------------------

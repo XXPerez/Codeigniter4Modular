@@ -32,8 +32,14 @@ The user guide corresponding to this version of the framework can be found
 
 ## Installation & updates
 
-`composer create-project xxperez/codeigniter4-modular codeigniter4-modular` then `composer update` whenever
-there is a new release of the framework.
+```sh
+composer create-project xxperez/codeigniter4-modular codeigniter4-modular
+```
+then 
+```sh
+composer update
+``` 
+whenever there is a new release of the framework.
 
 When updating, check the release notes to see if there are any changes you might need to apply
 to your `app` folder. The affected files can be copied or merged from
@@ -45,6 +51,7 @@ Go to codeigniter4-modular directory.
 Copy `env` to `.env` and tailor for your app, specifically the baseURL
 and default database settings:
 
+```sh
 app.baseURL = 'http://localhost'
 
 database.default.hostname = localhost
@@ -53,13 +60,26 @@ database.default.username = username
 database.default.password = password
 database.default.DBDriver = MySQLi
 database.default.port = 3306
+```
 
 After database configuration, check migrations to ensure the table users are created:
-Run : 'php spark migrate'
+Run : 
+```sh
+php spark migrate
+```
 
 ## Modular configuration
+Add this lines to your .env, and adapt as necessary. The example files have english and spanish translations:
 
-
+```sh
+#--------------------------------------------------------------------
+# LANGUAGE
+#--------------------------------------------------------------------
+app.defaultLocale = 'en'
+app.supportedLocales = ['en','es','fr','de']
+app.negotiateLocale = true
+app.appTimezone = 'America/Chicago'
+```
 
 
 ## Important Change with index.php
