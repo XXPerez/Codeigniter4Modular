@@ -2,6 +2,7 @@
 	"name": "xxperez/codeigniter4-modular",
 	"type": "project",
 	"description": "CodeIgniter4 modular starter app",
+        "version": "1.0.0",
 	"homepage": "https://codeigniter.com",
 	"license": "MIT",
 	"require": {
@@ -28,6 +29,5 @@
 		"forum": "http://forum.codeigniter.com/",
 		"source": "https://github.com/codeigniter4/CodeIgniter4",
 		"slack": "https://codeigniterchat.slack.com"
-	},
-        "minimum-stability": "dev"
+	}
 }
