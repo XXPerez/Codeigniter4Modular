@@ -8,11 +8,18 @@ The modular structure allows to separate each module from other, having each one
 
 | app | Modules | Module | Structure |
 | --- | ------- | ------ | --------- | 
-| app | Modules | Dashboard | Config | 
-| app | Modules | Dashboard | Controllers | 
-| app | Modules | Dashboard | Language | 
-| app | Modules | Dashboard | Views | 
-
+| app/ | Modules/ | Dashboard/ | Config/ | 
+| app/ | Modules/ | Dashboard/ | Controllers/ | 
+| app/ | Modules/ | Dashboard/ | Language/ | 
+| app/ | Modules/ | Dashboard/ | Views/ | 
+| app/ | Modules/ | Users/ | Config/ | 
+| app/ | Modules/ | Users/ | Controllers/ | 
+| app/ | Modules/ | Users/ | Filters/ | 
+| app/ | Modules/ | Users/ | Language/ | 
+| app/ | Modules/ | Users/ | Libraries/ | 
+| app/ | Modules/ | Users/ | Models/ | 
+| app/ | Modules/ | Users/ | Validation/ | 
+| app/ | Modules/ | Users/ | Views/ | 
 
 This repository holds a composer-installable app starter.
 It has been built from the 
