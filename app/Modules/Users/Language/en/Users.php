@@ -15,5 +15,6 @@ return [
     'form.have_user' => 'I have a user',
     'form.new_user' => 'New user ?',
     'register.created' => 'Registry created successful',
-    'register.updated' => 'Registry updated successful'
+    'register.updated' => 'Registry updated successful',
+    'form.login.badlogin' => 'Invalid email or password'
 ];

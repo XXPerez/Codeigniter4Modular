@@ -22,7 +22,7 @@ class Users extends BaseController {
         helper(['form']);
 
         if ($this->request->getMethod() == 'post') {
-            $response = $this->usersLib->login($this->request);
+            $response = $this->usersLib->login();
             if ($response->status == 'error') {
                 $data = $response->data;
             } else {
@@ -45,7 +45,7 @@ class Users extends BaseController {
         helper(['form']);
 
         if ($this->request->getMethod() == 'post') {
-            $response = $this->usersLib->register($this->request);
+            $response = $this->usersLib->register();
             if ($response->status == 'error') {
                 $data = $response->data;
             } else {
@@ -64,7 +64,7 @@ class Users extends BaseController {
         helper(['form']);
 
         if ($this->request->getMethod() == 'post') {
-            $response = $this->usersLib->profile($this->request);
+            $response = $this->usersLib->profile();
             if ($response->status == 'error') {
                 $data = $response->data;
             } else {

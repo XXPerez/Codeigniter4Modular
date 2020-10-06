@@ -46,7 +46,7 @@
                     </div>
                     
                     <div class="row">
-                        <div class="col-12 col-sm-6">
+                        <div class="col-12 col-sm-4">
                             <button type="submit" class="btn btn-primary"><?=lang('Users.form.button.create')?></button>
                         </div>
                         <div class="col-12 col-sm-8 text-right">

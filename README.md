@@ -81,7 +81,7 @@ app.negotiateLocale = true
 app.appTimezone = 'America/Chicago'
 ```
 
-All modules will reside under /app/Modules, but can be allocate elsewhere. 
+All modules will reside under /app/Modules, but can be allocated elsewhere. 
 When your create a module, edit /app/Config/Autoload.php and add your module to the PSR4, to be able to be found.
 ```php
 	public $psr4 = [
@@ -93,7 +93,7 @@ When your create a module, edit /app/Config/Autoload.php and add your module to 
 	];
 ```
 
-Each filter you declare inside a module, must to be aliased in app/Config/Filters.php to be able to declared inside a rule.
+Each filter you declare inside a module, must to be aliased in app/Config/Filters.php to be able to be used inside a rule.
 ```php
 	public $aliases = [
 		'csrf'     => \CodeIgniter\Filters\CSRF::class,
@@ -113,6 +113,20 @@ Each validation you declare inside a module, must to be set in the ruleSets vari
 		\Users\Validation\UserRules::class,
 	];
 ```
+
+### Module libraries
+Libraries within a module are used to define functions that lightweight the controllers.
+If you prefer to use validations inside a module library, you will need to access requests and validation objects directly:
+```php
+        $request = \Config\Services::request();
+        $validation = \Config\Services::validation();
+        $validation->setRules($rules, $errors);
+        $validation->withRequest($request)->run();
+        $validationErrors = $validation->getErrors();
+```
+
+
+
 
 ## Important Change with index.php
 
