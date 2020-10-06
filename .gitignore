@@ -89,6 +89,7 @@ composer.lock
 #-------------------------
 # IDE / Development Files
 #-------------------------
+*.bak
 
 # Modules Testing
 _modules/*
