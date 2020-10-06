@@ -2,7 +2,7 @@
 	"name": "xxperez/codeigniter4-modular",
 	"type": "project",
 	"description": "CodeIgniter4 modular starter app",
-        "version": "1.0.5",
+        "version": "1.0.6",
 	"homepage": "https://codeigniter.com",
 	"license": "MIT",
 	"require": {
