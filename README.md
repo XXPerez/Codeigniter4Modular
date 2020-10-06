@@ -5,7 +5,7 @@
 CodeIgniter is a PHP full-stack web framework that is light, fast, flexible, and secure. 
 More information can be found at the [official site](http://codeigniter.com).
 
-The modular structure allows to separate each module from other, having each one, controllers, database, filters, libraries, languages, models, routes, validations and views.   
+The "Modular Structure" allows to separate each module from other, having each one, controllers, database, filters, libraries, languages, models, routes, validations and views.   
 
 | app | Modules | Module | Structure |
 | --- | ------- | ------ | --------- | 
