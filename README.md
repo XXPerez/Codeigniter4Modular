@@ -69,7 +69,7 @@ copy env .env
 Edit .env, and tailor for your app, specifically the baseURL
 and default database settings:
 ```sh
-app.baseURL = 'http://localhost'
+app.baseURL = 'http://localhost/codeigniter4-modular'
 
 database.default.hostname = localhost
 database.default.database = database
@@ -97,6 +97,12 @@ app.negotiateLocale = true
 app.appTimezone = 'America/Chicago'
 ```
 
+Now, you can test the app, browse your installed directory, click on "Login" in the main page. 
+
+http://localhost/codeigniter4-modular
+
+
+### More about modular configuration
 All modules will reside under /app/Modules, but can be allocated elsewhere. 
 When your create a module, edit /app/Config/Autoload.php and add your module to the PSR4, to be able to be found.
 ```php
@@ -130,7 +136,7 @@ Each validation you declare inside a module, must to be set in the ruleSets vari
 	];
 ```
 
-### Module libraries
+### Modular libraries
 Libraries within a module are used to define functions that lightweight the controllers.
 If you prefer to use validations inside a module library, you will need to access requests and validation objects directly:
 ```php

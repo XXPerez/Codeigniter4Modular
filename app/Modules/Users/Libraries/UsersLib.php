@@ -71,8 +71,7 @@ class UsersLib {
             ];
             $data = $userModel->save($newData);
             if ($data) {
-                $session = session();
-                $session->setFlashdata(UtilsResponseLib::$SUCCESS, lang('Users.register.created'));
+                session()->setFlashdata(UtilsResponseLib::$SUCCESS, lang('Users.register.created'));
                 return $this->setResponse(UtilsResponseLib::$SUCCESS, $data);
             } else {
                 $data['Errors'] = 'Undefined';
@@ -113,9 +112,10 @@ class UsersLib {
 
             $userModel = new UserModel();
             $data = $userModel->save($newData);
-
-            $session = session();
-            $session->setFlashdata(UtilsResponseLib::$SUCCESS, lang('Users.register.updated'));
+            $user = $this->getUserById();
+            $this->setUserLogged((array) $user->data);
+            
+            session()->setFlashdata(UtilsResponseLib::$SUCCESS, lang('Users.register.updated'));
             return $this->setResponse(UtilsResponseLib::$SUCCESS, $data);
         }
     }
