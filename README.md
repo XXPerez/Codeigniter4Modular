@@ -34,15 +34,21 @@ The user guide corresponding to this version of the framework can be found
 
 ## Installation & updates
 
+Go to a browsable directory (Example: c:\xampp\htdocs)
+
 ```sh
 composer create-project xxperez/codeigniter4-modular
 ```
 then 
 ```sh
 cd codeigniter4-modular
+``` 
+
+## Updates 
+Whenever there is a new release of the framework:
+```sh
 composer update
 ``` 
-whenever there is a new release of the framework.
 
 When updating, check the release notes to see if there are any changes you might need to apply
 to your `app` folder. The affected files can be copied or merged from
@@ -51,9 +57,17 @@ to your `app` folder. The affected files can be copied or merged from
 ## Setup
 
 Go to codeigniter4-modular directory.
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and default database settings:
+```sh
+cd codeigniter4-modular
+``` 
 
+Copy `env` to `.env`: 
+```sh
+copy env .env
+``` 
+
+Edit .env, and tailor for your app, specifically the baseURL
+and default database settings:
 ```sh
 app.baseURL = 'http://localhost'
 
@@ -67,7 +81,7 @@ database.default.port = 3306
 
 After database configuration, run migrate to ensure the table users are created:
 ```sh
-php spark migrate
+php spark migrate -all
 ```
 
 ## Modular configuration
