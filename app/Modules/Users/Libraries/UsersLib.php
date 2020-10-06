@@ -1,19 +1,21 @@
 <?php
 namespace Users\Libraries;
+
 use Users\Models\UserModel;
+use Utils\Libraries\UtilsResponseLib;
 
 class UsersLib {
-    
-    public function getUserByEmail($email) 
-    {
+
+    use UtilsResponseLib;
+
+    public function getUserByEmail($email) {
         $userModel = new UserModel();
         $user = $userModel->where('email', $email)
                 ->first();
         return $user;
     }
-    
-    public function login($request)
-    {
+
+    public function login($request) {
         $rules = [
             'email' => 'required|min_length[6]|max_length[50]|valid_email',
             'password' => 'required|min_length[8]|max_length[255]|validateUser[email,password]',
@@ -24,24 +26,22 @@ class UsersLib {
             ]
         ];
 
-        $validation =  \Config\Services::validation();
+        $validation = \Config\Services::validation();
         $validation->setRules($rules, $errors);
         $validation->withRequest($request)->run();
         $validationErrors = $validation->getErrors();
-        
+
         if (!empty($validationErrors)) {
             $data['validation'] = $validation;
-            return $this->setResponse('error',$data);
+            return $this->setResponse('error', $data);
         } else {
             $user = $this->getUserByEmail($request->getVar('email'));
             $this->setUserLogged($user);
             return $this->setResponse('success', $user);
         }
-        
     }
-    
-    public function register($request)
-    {
+
+    public function register($request) {
         $rules = [
             'firstname' => 'required|min_length[3]|max_length[20]',
             'lastname' => 'required|min_length[3]|max_length[20]',
@@ -55,10 +55,10 @@ class UsersLib {
         $validation->setRules($rules, $errors);
         $validation->withRequest($request)->run();
         $validationErrors = $validation->getErrors();
-        
+
         if (!empty($validationErrors)) {
             $data['validation'] = $validation;
-            return $this->setResponse('error',$data);
+            return $this->setResponse('error', $data);
         } else {
             $userModel = new UserModel();
             $newData = [
@@ -70,18 +70,16 @@ class UsersLib {
             $data = $userModel->save($newData);
             if ($data) {
                 $session = session();
-                $session->setFlashdata('success',lang('Users.register.created'));
-                return $this->setResponse('success',$data);
+                $session->setFlashdata('success', lang('Users.register.created'));
+                return $this->setResponse('success', $data);
             } else {
                 $data['Errors'] = 'Undefined';
-                return $this->setResponse('error',$data);
+                return $this->setResponse('error', $data);
             }
         }
-
     }
-    
-    public function profile($request) 
-    {
+
+    public function profile($request) {
         $rules = [
             'firstname' => 'required|min_length[3]|max_length[20]',
             'lastname' => 'required|min_length[3]|max_length[20]',
@@ -91,7 +89,7 @@ class UsersLib {
             $rules['password_confirm'] = 'matches[password]';
         }
         $errors = [];
-        
+
         $validation = \Config\Services::validation();
         $validation->setRules($rules, $errors);
         $validation->withRequest($request)->run();
@@ -99,7 +97,7 @@ class UsersLib {
 
         if (!empty($validationErrors)) {
             $data['validation'] = $validation;
-            return $this->setResponse('error',$data);
+            return $this->setResponse('error', $data);
         } else {
             $newData = [
                 'id' => session()->get('id'),
@@ -114,25 +112,21 @@ class UsersLib {
             $data = $userModel->save($newData);
 
             $session = session();
-            $session->setFlashdata('success',lang('Users.register.updated'));
-            return $this->setResponse('success',$data);
-
+            $session->setFlashdata('success', lang('Users.register.updated'));
+            return $this->setResponse('success', $data);
         }
-        
     }
-    
-    public function getUserById($id = 0) 
-    {
-        if ($id === 0 ) {
+
+    public function getUserById($id = 0) {
+        if ($id === 0) {
             $id = session()->get('id');
         }
         $userModel = new UserModel();
         $user = $userModel->where('id', $id)->first();
         return $this->setResponse('success', $user);
     }
-    
-    public function logout()
-    {
+
+    public function logout() {
         if (session()->get('isLoggedIn')) {
             session()->destroy();
             return true;
@@ -140,9 +134,8 @@ class UsersLib {
             return false;
         }
     }
-    
-    private function setUserLogged($user)
-    {
+
+    private function setUserLogged($user) {
         $data = [
             'id' => $user['id'],
             'firstname' => $user['firstname'],
@@ -153,15 +146,5 @@ class UsersLib {
         session()->set($data);
         return true;
     }
-    
-    protected function setResponse($status, $data = null)
-    {
-        $response = new \stdClass();
-        
-        $response->status = $status;
-        $response->data = $data;
-        
-        return $response;
-    }
-    
+
 }

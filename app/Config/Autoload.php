@@ -44,6 +44,7 @@ class Autoload extends AutoloadConfig
                 APP_NAMESPACE.'\Controllers' => APPPATH.'Controllers',
                 'Dashboard' => APPPATH . 'Modules\Dashboard' ,
                 'Users' => APPPATH . 'Modules\Users' ,
+                'Utils' => APPPATH . 'Modules\Utils' ,
 	];
 
 	/**

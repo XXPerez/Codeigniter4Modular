@@ -1,5 +1,6 @@
 <?php
 namespace Users\Controllers;
+
 use App\Controllers\Basecontroller;
 use Users\Models\UserModel;
 use Users\Libraries\UsersLib;
@@ -7,15 +8,14 @@ use Users\Libraries\UsersLib;
 class Users extends BaseController {
 
     protected $usersLib;
-    
-    public function __construct()
-    {
+
+    public function __construct() {
         $this->usersLib = new UsersLib();
     }
-    
+
     public function login() {
         if (session()->get('isLoggedIn')) {
-            return redirect()->to(base_url().'/dashboard');
+            return redirect()->to(base_url() . '/dashboard');
         }
 
         $data = [];
@@ -26,21 +26,19 @@ class Users extends BaseController {
             if ($response->status == 'error') {
                 $data = $response->data;
             } else {
-                return redirect()->to(base_url().'/dashboard');
+                return redirect()->to(base_url() . '/dashboard');
             }
         }
-        
+
         echo view('templates/header', $data);
         echo view('Users\Views\login');
         echo view('templates/footer');
     }
-    
-    public function logout()
-    {
+
+    public function logout() {
         $response = $this->usersLib->logout();
-        return redirect()->to(base_url().'/');
+        return redirect()->to(base_url() . '/');
     }
-    
 
     public function register() {
         $data = [];
@@ -51,7 +49,7 @@ class Users extends BaseController {
             if ($response->status == 'error') {
                 $data = $response->data;
             } else {
-                return redirect()->to(base_url().'/login');
+                return redirect()->to(base_url() . '/login');
             }
         }
 
@@ -60,8 +58,8 @@ class Users extends BaseController {
         echo view('templates/footer');
     }
 
-    public function profile(){
-        
+    public function profile() {
+
         $data = [];
         helper(['form']);
 
@@ -70,16 +68,15 @@ class Users extends BaseController {
             if ($response->status == 'error') {
                 $data = $response->data;
             } else {
-                return redirect()->to(base_url().'/profile');
+                return redirect()->to(base_url() . '/profile');
             }
         }
-        
+
         $data['user'] = $this->usersLib->getuserById()->data;
 
         echo view('templates/header', $data);
         echo view('Users\Views\profile');
         echo view('templates/footer');
-        
     }
 
 }
