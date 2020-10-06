@@ -81,6 +81,38 @@ app.negotiateLocale = true
 app.appTimezone = 'America/Chicago'
 ```
 
+All modules will reside under /app/Modules, but can be allocate elsewhere. 
+When your create a module, edit /app/Config/Autoload.php and add your module to the PSR4, to be able to be found.
+```sh
+	public $psr4 = [
+		APP_NAMESPACE => APPPATH, // For custom app namespace
+		'Config'      => APPPATH . 'Config',
+                APP_NAMESPACE.'\Controllers' => APPPATH.'Controllers',
+                'Dashboard' => APPPATH . 'Modules\Dashboard' ,
+                'Users' => APPPATH . 'Modules\Users' ,
+	];
+```
+
+Each filter you declare inside a module, must to be aliased in app/Config/Filters.php to be able to declared inside a rule.
+```sh
+	public $aliases = [
+		'csrf'     => \CodeIgniter\Filters\CSRF::class,
+		'toolbar'  => \CodeIgniter\Filters\DebugToolbar::class,
+		'honeypot' => \CodeIgniter\Filters\Honeypot::class,
+		'auth' => \Users\Filters\AuthFilter::class,
+		'noauth' => \Users\Filters\NoAuthFilter::class,
+	];
+```
+Each validation you declare inside a module, must to be set in the ruleSets variable in app/Config/Validation.php.
+```sh
+	public $ruleSets = [
+		\CodeIgniter\Validation\Rules::class,
+		\CodeIgniter\Validation\FormatRules::class,
+		\CodeIgniter\Validation\FileRules::class,
+		\CodeIgniter\Validation\CreditCardRules::class,
+		\Users\Validation\UserRules::class,
+	];
+```
 
 ## Important Change with index.php
 
