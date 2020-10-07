@@ -1,3 +1,5 @@
+<?= $this->extend('layouts/general') ?>
+<?= $this->section('content') ?>
 <div class="container">
     <div class="row">
         <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 mt-5 pt-3 pb-3 bg-white from-wrapper">
@@ -71,3 +73,4 @@
         setTimeout(function(){ $("#alertmessage").fadeOut(800); }, 1500);
     });
 </script>
+<?= $this->endSection() ?>

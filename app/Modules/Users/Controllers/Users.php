@@ -29,14 +29,11 @@ class Users extends BaseController {
                 return redirect()->to(base_url() . '/dashboard');
             }
         }
-
-        echo view('templates/header', $data);
-        echo view('Users\Views\login');
-        echo view('templates/footer');
+        return view('Users\Views\login', $data);
     }
 
     public function logout() {
-        $response = $this->usersLib->logout();
+        $logout = $this->usersLib->logout();
         return redirect()->to(base_url() . '/');
     }
 
@@ -53,9 +50,7 @@ class Users extends BaseController {
             }
         }
 
-        echo view('templates/header', $data);
-        echo view('Users\Views\register');
-        echo view('templates/footer');
+        return view('Users\Views\register', $data);
     }
 
     public function profile() {
@@ -74,9 +69,7 @@ class Users extends BaseController {
 
         $data['user'] = $this->usersLib->getuserById()->data;
 
-        echo view('templates/header', $data);
-        echo view('Users\Views\profile');
-        echo view('templates/footer');
+        return view('Users\Views\profile', $data);
     }
 
 }

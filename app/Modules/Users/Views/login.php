@@ -1,3 +1,5 @@
+<?= $this->extend('layouts/general') ?>
+<?= $this->section('content') ?>
 <div class="container">
     <div class="row">
         <div class="col-12 col-sm-6 offset-sm-2 col-md-5 offset-md-3 mt-5 pt-3 pb-3 bg-white from-wrapper">
@@ -44,3 +46,4 @@
         
     </div>
 </div>
+<?= $this->endSection() ?>

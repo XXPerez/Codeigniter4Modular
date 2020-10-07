@@ -7,6 +7,7 @@ trait UtilsResponseLib {
     static $ERROR = 'error';
     
     protected function setResponse($status, $data = null) {
+        
         $response = new \stdClass();
         $response->status = $status;
         $response->data = $data;

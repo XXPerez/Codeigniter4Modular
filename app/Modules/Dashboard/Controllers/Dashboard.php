@@ -7,9 +7,7 @@ class Dashboard extends BaseController {
     public function index() {
         $data = [];
 
-        echo view('templates/header', $data);
-        echo view('Dashboard\Views\dashboard');
-        echo view('templates/footer');
+        return view('Dashboard\Views\dashboard', $data);
        
     }
 
