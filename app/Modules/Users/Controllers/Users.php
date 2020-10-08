@@ -23,8 +23,8 @@ class Users extends BaseController {
 
         if ($this->request->getMethod() == 'post') {
             $response = $this->usersLib->login();
-            if ($response->status == 'error') {
-                $data = $response->data;
+            if ($response->status != \Utils\Libraries\UtilsResponseLib::$SUCCESS) {
+                $data = $response->error;
             } else {
                 return redirect()->to(base_url() . '/dashboard');
             }
@@ -43,8 +43,8 @@ class Users extends BaseController {
 
         if ($this->request->getMethod() == 'post') {
             $response = $this->usersLib->register();
-            if ($response->status == 'error') {
-                $data = $response->data;
+            if ($response->status != \Utils\Libraries\UtilsResponseLib::$SUCCESS) {
+                $data = $response->error;
             } else {
                 return redirect()->to(base_url() . '/login');
             }
@@ -59,15 +59,18 @@ class Users extends BaseController {
         helper(['form']);
 
         if ($this->request->getMethod() == 'post') {
+            if ($this->request->getVar('fmode') == 'cancel') {
+                return redirect()->to(base_url() . '/dashboard');
+            }
             $response = $this->usersLib->profile();
-            if ($response->status == 'error') {
-                $data = $response->data;
+            if ($response->status != \Utils\Libraries\UtilsResponseLib::$SUCCESS) {
+                $data = $response->error;
             } else {
                 return redirect()->to(base_url() . '/profile');
             }
         }
 
-        $data['user'] = $this->usersLib->getuserById()->data;
+        $data['user'] = $this->usersLib->getuserById();
 
         return view('Users\Views\profile', $data);
     }

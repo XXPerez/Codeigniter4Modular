@@ -3,11 +3,15 @@ namespace Users\Libraries;
 
 use Users\Models\UserModel;
 use Utils\Libraries\UtilsResponseLib;
-
+use CodeIgniter\HTTP\Response;
 
 class UsersLib {
 
     use UtilsResponseLib;
+    public function __construct() {
+        $config = config(App::class);
+        $this->response = new Response($config);
+    }
 
     public function getUserByEmail($email) {
         $userModel = new UserModel();
@@ -35,7 +39,7 @@ class UsersLib {
 
         if (!empty($validationErrors)) {
             $data['validation'] = $validation;
-            return $this->setResponse(UtilsResponseLib::$ERROR, $data);
+            return $this->setResponse(UtilsResponseLib::$NOTALLOWED, $data);
         } else {
             $user = $this->getUserByEmail($request->getVar('email'));
             $this->setUserLogged($user);
@@ -61,7 +65,7 @@ class UsersLib {
 
         if (!empty($validationErrors)) {
             $data['validation'] = $validation;
-            return $this->setResponse(UtilsResponseLib::$ERROR, $data);
+            return $this->setResponse(UtilsResponseLib::$NOTALLOWED, $data);
         } else {
             $userModel = new UserModel();
             $newData = [
@@ -72,11 +76,11 @@ class UsersLib {
             ];
             $data = $userModel->save($newData);
             if ($data) {
-                session()->setFlashdata(UtilsResponseLib::$SUCCESS, lang('Users.register.created'));
+                session()->setFlashdata('success', lang('Users.register.created'));
                 return $this->setResponse(UtilsResponseLib::$SUCCESS, $data);
             } else {
-                $data['Errors'] = 'Undefined';
-                return $this->setResponse(UtilsResponseLib::$ERROR, $data);
+                $data['errormessaje'] = 'Undefined';
+                return $this->setResponse(UtilsResponseLib::$SERVERERROR, $data);
             }
         }
     }
@@ -100,7 +104,7 @@ class UsersLib {
 
         if (!empty($validationErrors)) {
             $data['validation'] = $validation;
-            return $this->setResponse(UtilsResponseLib::$ERROR, $data);
+            return $this->setResponse(UtilsResponseLib::$NOTALLOWED, $data);
         } else {
             $newData = [
                 'id' => session()->get('id'),
@@ -112,12 +116,12 @@ class UsersLib {
             }
 
             $userModel = new UserModel();
-            $data = $userModel->save($newData);
+            $userModel->save($newData);
             $user = $this->getUserById();
-            $this->setUserLogged((array) $user->data);
+            $this->setUserLogged($user);
             
-            session()->setFlashdata(UtilsResponseLib::$SUCCESS, lang('Users.register.updated'));
-            return $this->setResponse(UtilsResponseLib::$SUCCESS, $data);
+            session()->setFlashdata('success', lang('Users.register.updated'));
+            return $this->setResponse(UtilsResponseLib::$SUCCESS, $user);
         }
     }
 
@@ -127,7 +131,7 @@ class UsersLib {
         }
         $userModel = new UserModel();
         $user = $userModel->where('id', $id)->first();
-        return $this->setResponse(UtilsResponseLib::$SUCCESS, $user);
+        return $user;
     }
 
     public function logout() {

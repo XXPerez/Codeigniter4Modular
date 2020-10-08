@@ -48,11 +48,11 @@
                     </div>
                     
                     <div class="row">
-                        <div class="col-12 col-sm-4">
-                            <button type="submit" class="btn btn-primary"><?=lang('Users.form.button.create')?></button>
-                        </div>
-                        <div class="col-12 col-sm-8 text-right">
+                        <div class="col-12 col-sm-8">
                             <a href="<?=base_url()?>/login"><?=lang('Users.form.have_user')?></a>
+                        </div>
+                        <div class="col-12 col-sm-4 text-right">
+                            <button type="submit" class="btn btn-primary"><?=lang('Users.form.button.create')?></button>
                         </div>
                     </div>
                 </form>

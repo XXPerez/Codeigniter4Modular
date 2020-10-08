@@ -7,6 +7,7 @@
                 <h3><?= $user['firstname'].' '.$user['lastname']?></h3>
                 <hr>
                 <form class="" action="<?=base_url()?>/profile" method="post">
+                    <input name='fmode' id='fmode' value='update' type='hidden'>
                     <div class="row">
                         <div class="col-12 col-sm-6">
                             <div class="form-group">
@@ -57,6 +58,9 @@
                     
                     <div class="row">
                         <div class="col-12 col-sm-6">
+                            <button type="cancel" id='cancel' class="btn btn-secondary"><?=lang('Users.form.button.cancel')?></button>
+                        </div>
+                        <div class="col-12 col-sm-6 text-right">
                             <button type="submit" class="btn btn-primary"><?=lang('Users.form.button.update')?></button>
                         </div>
                     </div>
@@ -71,6 +75,9 @@
 <script>
     $(document).ready(function(){
         setTimeout(function(){ $("#alertmessage").fadeOut(800); }, 1500);
+        $("#cancel").on('click', function (){
+            $("#fmode").val('cancel');
+        });
     });
 </script>
 <?= $this->endSection() ?>
