@@ -156,7 +156,7 @@ php spark module:create Customers
 
 Module create options:
 -f ModuleDir (other than App/Modules)
--c FCLNVO    (Create only con[F]ig, [C]ontroller, [L]ibrary, [M]odel, [V]iew, [O]ther dirs)
+-c FCLMVO    (Create only con[F]ig, [C]ontroller, [L]ibrary, [M]odel, [V]iew, [O]ther dirs)
 
 ```sh
 php spark module:create Customers -c FCMV
