@@ -147,8 +147,20 @@ If you prefer to use validations inside a module library, you will need to acces
         $validationErrors = $validation->getErrors();
 ```
 
+### Modular creation
+To create new modules, you can use spark module:create option, from base directory.
+For example, to create a module named 'Customers':
+```sh
+php spark module:create Customers
+``` 
 
+Module create options:
+-f ModuleDir (other than App/Modules)
+-c FCLNVO    (Create only con[F]ig, [C]ontroller, [L]ibrary, [M]odel, [V]iew, [O]ther dirs)
 
+```sh
+php spark module:create Customers -c FCMV
+``` 
 
 ## Important Change with index.php
 

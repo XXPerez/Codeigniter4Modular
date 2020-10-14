@@ -4,37 +4,36 @@ use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
 
 /**
- * Create an Module in HMVC
+ * Create a Module in Modular structure
  *
  * @package App\Commands
- * @author Mufid Jamaluddin <https://github.com/MufidJamaluddin/Codeigniter4-HMVC>
+ * @author XPerez <>
  */
 class ModuleCreate extends BaseCommand
 {
     /**
-     * The group the command is lumped under
-     * when listing commands.
-     *
+     * Group
+     * 
      * @var string
      */
     protected $group       = 'Development';
 
     /**
-     * The Command's name
+     * Command's name
      *
      * @var string
      */
     protected $name        = 'module:create';
 
     /**
-     * the Command's short description
+     * Command description
      *
      * @var string
      */
-    protected $description = 'Create CodeIgniter HMVC Modules in app/Modules folder';
+    protected $description = 'Create CodeIgniter Modules in app/Modules folder';
 
     /**
-     * the Command's usage
+     * Command usage
      *
      * @var string
      */
@@ -53,8 +52,8 @@ class ModuleCreate extends BaseCommand
      * @var array
      */
     protected $options      = [
-        '-f' => 'Set module folder inside app path (default Modules)',
-        '-v' => 'Set view folder inside app path (default Views/modules/)',
+        '-f' => 'Set module folder other than app/Modules',
+        '-c' => 'Create only con[F]ig, [C]ontroller, [L]ibrary, [M]odel, [V]iew, [O]ther dirs'
     ];
 
     /**
@@ -90,31 +89,52 @@ class ModuleCreate extends BaseCommand
 
         $this->module_name = $params[0];
 
-        if(!isset($this->module_name))
+        if(strlen(preg_replace('/[^A-Za-z0-9]+/','',$this->module_name)) <> mb_strlen($this->module_name))
         {
-            CLI::error("Module name must be set!");
+            CLI::error("Module name must to be plain ascii characters A-Z or a-z, and can contain numbers 0-9");
             return;
         }
 
         $this->module_name = ucfirst($this->module_name);
 
-        $module_folder         = $params['-f'] ?? CLI::getOption('f');
-        $this->module_folder   = ucfirst($module_folder ?? 'Modules');
-
-        $view_folder         = $params['-v'] ?? CLI::getOption('v');
-        $this->view_folder   = $view_folder ?? 'Views';
-
-        mkdir(APPPATH .  $this->module_folder . '/' . $this->module_name);
+        $module_folder         = preg_replace('/[^A-Za-z0-9]+/','',$params['-f'] ?? CLI::getOption('f'));
+        $this->module_folderOrig   = $module_folder?ucfirst($module_folder):basename(APPPATH).DIRECTORY_SEPARATOR.'Modules';
+        $this->module_folder = APPPATH . '..'. DIRECTORY_SEPARATOR. $this->module_folderOrig;
+        if (!is_dir($this->module_folder)) {
+            mkdir($this->module_folder);
+        }
+        $this->module_folder = realpath($this->module_folder);
+        
+        CLI::write('Creating module '.$this->module_folderOrig . DIRECTORY_SEPARATOR . $this->module_name);
+        if (!is_dir($this->module_folder . DIRECTORY_SEPARATOR . $this->module_name)) {
+            mkdir($this->module_folder . DIRECTORY_SEPARATOR . $this->module_name, 0777, true);
+        }
 
         try
         {
-            $this->createConfig();
-            $this->createController();
-            $this->createLibrary();
-            $this->createModel();
-            $this->createView();
+            if (CLI::getOption('c') == '' || strstr(CLI::getOption('c'),'F')) {
+                $this->createConfig();
+            }
+            if (CLI::getOption('c') == '' || strstr(CLI::getOption('c'),'C')) {
+                $this->createController();
+            }
+            if (CLI::getOption('c') == '' || strstr(CLI::getOption('c'),'L')) {
+                $this->createLibrary();
+            }
+            if (CLI::getOption('c') == '' || strstr(CLI::getOption('c'),'M')) {
+                $this->createModel();
+            }
+            if (CLI::getOption('c') == '' || strstr(CLI::getOption('c'),'V')) {
+                $this->createView();
+            }
+            if (CLI::getOption('c') == '' || strstr(CLI::getOption('c'),'O')) {
+                $this->createOtherDirs();
+            }
+            $this->updateAutoload();
 
             CLI::write('Module created!');
+            CLI::write('Try to browse to http://localhost/'.strtolower($this->module_name));
+
         }
         catch (\Exception $e)
         {
@@ -127,9 +147,7 @@ class ModuleCreate extends BaseCommand
      */
     protected function createConfig()
     {
-        $configPath = APPPATH .  $this->module_folder . '/' . $this->module_name . '/Config';
-
-        mkdir($configPath);
+        $configPath = $this->createDir('Config');
 
         if (!file_exists($configPath . '/Routes.php'))
         {
@@ -148,133 +166,126 @@ if(!isset(\$routes))
         }
         else
         {
-            CLI::error("Can't Create Routes Config! Old File Exists!");
+            CLI::error("Routes Config allready exists!");
         }
     }
 
     /**
-     * Create Controller File
+     * Create controller file
      */
     protected function createController()
     {
-        $controllerPath = APPPATH .  $this->module_folder . '/' . $this->module_name . '/Controllers';
+        $controllerPath = $this->createDir('Controllers');
 
-        @mkdir($controllerPath);
-
-        if (!file_exists($controllerPath . '/'.ucfirst($this->module_name).'.php'))
+        if (!file_exists($controllerPath . DIRECTORY_SEPARATOR . ucfirst($this->module_name).'.php'))
         {
-            $template = "<?php namespace $this->module_name\\Controllers;
-use CodeIgniter\Controller;
+            $template = "<?php 
+namespace ".ucfirst($this->module_name)."\\Controllers;
+use CodeIgniter\\Controller;
+
 class ".ucfirst($this->module_name)." extends Controller
 {
     /**
      * Constructor.
+     *
      */
     public function __construct()
     {
+        
     }
+    
+    /**
+     * Index
+     *
+     * @return View
+     */
     public function index()
-	{
-		\$data = [
-		    'title' => 'Dashboard Page',
-            'view' => '" . strtolower($this->module_name) . "/dashboard',
-            'data' => \$this->userModel->getUsers(),
-        ];
-		return view('template/layout', \$data);
-	}
+    {
+        \$data = [];
+        helper(['form']);
+        
+        return view('".ucfirst($this->module_name)."\Views\index', \$data);
+    }
 }
 ";
-            file_put_contents($controllerPath . '/'.ucfirst($this->module_name).'.php', $template);
+            file_put_contents($controllerPath . DIRECTORY_SEPARATOR . ucfirst($this->module_name).'.php', $template);
         }
         else
         {
-            CLI::error("Can't Create Controller! Old File Exists!");
+            CLI::error("Controller allready exists!");
         }
     }
 
     /**
-     * Create Models File
+     * Create models file
      */
     protected function createModel()
     {
-        $modelPath = APPPATH .  $this->module_folder . '/' . $this->module_name . '/Models';
+        $modelPath = $this->createDir('Models');
 
-        mkdir($modelPath);
+        if (!file_exists($modelPath . DIRECTORY_SEPARATOR. ucfirst($this->module_name). 'Model.php')) {
+            $template = "<?php 
+namespace ".ucfirst($this->module_name)."\\Models;
+use CodeIgniter\Model;
 
-        if (!file_exists($modelPath . '/UserEntity.php')) {
-            $template = "<?php namespace App\Modules\\$this->module_name\\Models;
-class UserEntity
+class ".ucfirst($this->module_name). "Model extends Model 
 {
-    protected \$id;
-    protected \$name;
+    protected \$table = '".$this->module_name."';
+    protected \$allowedFields = [];
+    protected \$beforeInsert = ['beforeInsert'];
+    protected \$beforeUpdate = ['beforeUpdate'];
+    
     public function __construct()
     {
+        parent::__construct();
     }
-    public static function of(\$uid, \$uname)
-    {
-        \$user = new UserEntity();
-        \$user->setId(\$uid);
-        \$user->setName(\$uname);
-        return \$user;
+    
+    protected function beforeInsert(array \$data) {
+        return \$data;
     }
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return \$this->id;
-    }
-    /**
-     * @param mixed \$id
-     */
-    public function setId(\$id): void
-    {
-        \$this->id = \$id;
-    }
-    /**
-     * @return mixed
-     */
-    public function getName()
-    {
-        return \$this->name;
-    }
-    /**
-     * @param mixed \$name
-     */
-    public function setName(\$name): void
-    {
-        \$this->name = \$name;
+
+    protected function beforeUpdate(array \$data) {
+        return \$data;
     }
 }";
 
-            file_put_contents($modelPath . '/UserEntity.php', $template);
+            file_put_contents($modelPath . DIRECTORY_SEPARATOR. ucfirst($this->module_name). 'Model.php', $template);
         }
         else
         {
-            CLI::error("Can't Create UserEntity! Old File Exists!");
+            CLI::error("Model allready exists!");
         }
 
-        if (!file_exists($modelPath . '/UserModel.php'))
-        {
-
-            $template = "<?php namespace App\Modules\\$this->module_name\\Models;
-class UserModel
-{
-    public function getUsers()
-    {
-        return [
-            UserEntity::of('PL0001', 'Mufid Jamaluddin'),
-            UserEntity::of('PL0002', 'Andre Jhonson'),
-            UserEntity::of('PL0003', 'Indira Wright'),
-        ];
     }
+
+    /**
+     * Create library file
+     */
+    protected function createLibrary()
+    {
+        $libPath = $this->createDir('Libraries');
+
+        if (!file_exists($libPath . DIRECTORY_SEPARATOR. ucfirst($this->module_name). 'Lib.php')) {
+            $template = "<?php 
+namespace ".ucfirst($this->module_name)."\\Libraries;
+use ".ucfirst($this->module_name)."\Models\\".ucfirst($this->module_name)."Model;
+
+class ".ucfirst($this->module_name)."Lib {
+
+    public function __construct() {
+        \$config = config(App::class);
+        \$this->response = new Response(\$config);
+    }
+
 }";
-            file_put_contents($modelPath . '/UserModel.php', $template);
+
+            file_put_contents($libPath . DIRECTORY_SEPARATOR. ucfirst($this->module_name). 'Lib.php', $template);
         }
         else
         {
-            CLI::error("Can't Create UserModel! Old File Exists!");
+            CLI::error("Library allready exists!");
         }
+
     }
 
     /**
@@ -282,46 +293,121 @@ class UserModel
      */
     protected function createView()
     {
-        if($this->view_folder !== $this->module_folder)
-            $view_path = APPPATH . $this->view_folder . '/' . strtolower($this->module_name);
-        else
-            $view_path = APPPATH . $this->module_folder . '/' . $this->module_name . '/Views';
+        $viewPath = $this->createDir('Views');
 
-        mkdir($view_path);
-
-        if (!file_exists($view_path . '/dashboard.php'))
-        {
+        if (!file_exists($viewPath . DIRECTORY_SEPARATOR.  'index.php')) {
             $template = '<section>
-	<h1>Dashboard Page</h1>
-    <table border=\"1px\">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php foreach (\$data ?? [] as \$key => \$itemUser):?>
-            <tr>
-                <td><?=\$itemUser->getId() ?? "" ?></td>
-                <td><?=\$itemUser->getName() ?? "" ?></td>
-            </tr>
-        <?php endforeach;?>
-        </tbody>
-    </table>
-	<p>If you would like to edit this page you will find it located at:</p>
-	<pre><code>app/Views/'. strtolower($this->module_name) .'/dashboard.php</code></pre>
-	<p>The corresponding controller for this page can be found at:</p>
-	<pre><code>app/Modules/'. $this->module_name .'/Controllers/Dashboard.php</code></pre>
+    <h1>Module Pepe => Index</h1>
 </section>';
 
-            file_put_contents($view_path . '/dashboard.php', $template);
+            file_put_contents($viewPath . DIRECTORY_SEPARATOR.  'index.php', $template);
         }
         else
         {
-            CLI::error("Can't Create View! Old File Exists!");
+            CLI::error("Index view allready exists!");
         }
 
     }
+ 
+    /**
+     * function createOtherDirs
+     * 
+     * Create other dirs
+     */
+    protected function createOtherDirs()
+    {
+        $this->createDir('Database', true);
+        $this->createDir('Database/Migrations', true);
+        $this->createDir('Database/Seeds', true);
+        $this->createDir('Filters', true);
+        $this->createDir('Language', true);
+        $this->createDir('Libraries', true);
+        $this->createDir('Validation', true);
+    }
+    
+    /**
+     * function createDir
+     * 
+     * Create directory and set, if required, gitkeep to keep this in git.
+     * 
+     * @param type $folder
+     * @param type $gitkeep
+     * @return string
+     */
+    
+    protected function createDir($folder, $gitkeep = false) {
+        $dir = $this->module_folder . DIRECTORY_SEPARATOR . ucfirst($this->module_name) . DIRECTORY_SEPARATOR .  $folder;
+        if (!is_dir($dir)) {        
+            mkdir($dir, 0777, true);
+            if ($gitkeep) {
+                file_put_contents($dir .  '/.gitkeep', '');
+            }
+        }
+        
+        return $dir;
+        
+    }
+    
+    /**
+     * function updateAutoload
+     * 
+     * Add a psr4 configuration to Config/Autoload.php file
+     * 
+     * @return boolean
+     */
+    
+    protected function updateAutoload() {
+        $Autoload = new \Config\Autoload;
+        $psr4 = $Autoload->psr4; 
+        if (isset($psr4[ucfirst($this->module_name)])){
+            return false;
+        }
+        $file = fopen(APPPATH . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'Autoload.php','r');
+        if (!$file) {
+            CLI::error("Config/Autoload.php nor readable!");
+            return false;
+        }
 
+        $newcontent = '';
+        $posfound = false;
+        $posline = 0;
+
+        if (CLI::getOption('f')== '') {
+            $psr4Add = "\t\t'".ucfirst($this->module_name) . "' => ". 'APPPATH . ' ."'Modules\\" . ucfirst($this->module_name)."',";
+        } else {
+            $psr4Add = "\t\t'".ucfirst($this->module_name) . "' => ". 'ROOTPATH . ' . "'".$this->module_folderOrig."\\" . ucfirst($this->module_name)."',";
+        }
+        
+        while (($buffer = fgets($file, 4096)) !== false) {
+            if ($posfound && strpos($buffer, ']')) {
+                //Last line of $psr4
+                $newcontent .= $psr4Add."\n";
+                $posfound = false;
+            }
+            if ($posfound && $posline > 3 && substr(trim($buffer),-1) != ',') {
+                $buffer = str_replace("\n", ",\n", $buffer);
+            }
+            if (strpos($buffer, 'public $psr4 = [')) {
+                $posfound = true;
+                $posline = 1;
+                //First line off $psr4
+            }
+            if ($posfound) {
+                $posline ++;
+            }
+            $newcontent .= $buffer;
+        }
+        
+        $file = fopen(APPPATH . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'Autoload.php','w');
+        if (!$file) {
+            CLI::error("Config/Autoload.php nor writable!");
+            return false;
+        }
+        fwrite($file,$newcontent);
+        fclose($file);
+        
+        return true;
+        
+    }
+    
 }
