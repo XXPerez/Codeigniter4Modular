@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 mt-5 pt-3 pb-3 bg-white from-wrapper">
             <div class="container">
-                <h3><?= $user['firstname'].' '.$user['lastname']?></h3>
+                <h3><?= $user->firstname.' '.$user->lastname?></h3>
                 <hr>
                 <form class="" action="<?=base_url()?>/profile" method="post">
                     <input name='fmode' id='fmode' value='update' type='hidden'>
@@ -12,19 +12,19 @@
                         <div class="col-12 col-sm-6">
                             <div class="form-group">
                                 <label for="firstname"><?=lang('Users.form.name')?></label>
-                                <input type="text" class="form-control" name="firstname" id="firstname" value="<?= set_value('firstname', $user['firstname'])?>">
+                                <input type="text" class="form-control" name="firstname" id="firstname" value="<?= set_value('firstname', $user->firstname)?>">
                             </div>
                         </div>
                         <div class="col-12 col-sm-6">
                             <div class="form-group">
                                 <label for="lastname"><?=lang('Users.form.lastname')?></label>
-                                <input type="text" class="form-control" name="lastname" id="lastname" value="<?= set_value('lastname', $user['lastname'])?>">
+                                <input type="text" class="form-control" name="lastname" id="lastname" value="<?= set_value('lastname', $user->lastname)?>">
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="email"><?=lang('Users.form.email')?></label>
-                                <input type="text" readonly class="form-control" name="" id="email" value="<?= $user['email']?>">
+                                <input type="text" readonly class="form-control" name="" id="email" value="<?= $user->email?>">
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 bg-light">

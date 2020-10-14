@@ -3,9 +3,16 @@ namespace Users\Models;
 
 use CodeIgniter\Model;
 
-class UserModel extends Model {
+class UsersModel extends Model {
 
     protected $table = 'users';
+    protected $primaryKey = 'id';
+    protected $returnType     = 'object';
+    protected $useSoftDeletes = false;
+    protected $useTimestamps = true;
+    protected $validationRules    = [];
+    protected $validationMessages = [];
+    protected $skipValidation     = false;
     protected $allowedFields = ['firstname', 'lastname', 'email', 'password', 'updated_at'];
     protected $beforeInsert = ['beforeInsert'];
     protected $beforeUpdate = ['beforeUpdate'];

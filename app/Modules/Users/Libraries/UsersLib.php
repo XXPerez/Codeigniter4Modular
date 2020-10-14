@@ -1,7 +1,7 @@
 <?php
 namespace Users\Libraries;
 
-use Users\Models\UserModel;
+use Users\Models\UsersModel;
 use Utils\Libraries\UtilsResponseLib;
 use CodeIgniter\HTTP\Response;
 
@@ -14,8 +14,8 @@ class UsersLib {
     }
 
     public function getUserByEmail($email) {
-        $userModel = new UserModel();
-        $user = $userModel->where('email', $email)
+        $usersModel = new UsersModel();
+        $user = $usersModel->where('email', $email)
                 ->first();
         return $user;
     }
@@ -67,14 +67,14 @@ class UsersLib {
             $data['validation'] = $validation;
             return $this->setResponse(UtilsResponseLib::$NOTALLOWED, $data);
         } else {
-            $userModel = new UserModel();
+            $usersModel = new UsersModel();
             $newData = [
                 'firstname' => $request->getVar('firstname'),
                 'lastname' => $request->getVar('lastname'),
                 'email' => $request->getVar('email'),
                 'password' => $request->getVar('password'),
             ];
-            $data = $userModel->save($newData);
+            $data = $usersModel->save($newData);
             if ($data) {
                 session()->setFlashdata('success', lang('Users.register.created'));
                 return $this->setResponse(UtilsResponseLib::$SUCCESS, $data);
@@ -115,8 +115,8 @@ class UsersLib {
                 $newData['password'] = $request->getPost('password');
             }
 
-            $userModel = new UserModel();
-            $userModel->save($newData);
+            $usersModel = new UsersModel();
+            $usersModel->save($newData);
             $user = $this->getUserById();
             $this->setUserLogged($user);
             
@@ -129,8 +129,8 @@ class UsersLib {
         if ($id === 0) {
             $id = session()->get('id');
         }
-        $userModel = new UserModel();
-        $user = $userModel->where('id', $id)->first();
+        $usersModel = new UsersModel();
+        $user = $usersModel->where('id', $id)->first();
         return $user;
     }
 
@@ -145,10 +145,10 @@ class UsersLib {
 
     private function setUserLogged($user) {
         $data = [
-            'id' => $user['id'],
-            'firstname' => $user['firstname'],
-            'lastname' => $user['lastname'],
-            'email' => $user['email'],
+            'id' => $user->id,
+            'firstname' => $user->firstname,
+            'lastname' => $user->lastname,
+            'email' => $user->email,
             'isLoggedIn' => true
         ];
         session()->set($data);

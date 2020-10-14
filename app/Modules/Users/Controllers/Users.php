@@ -2,7 +2,7 @@
 namespace Users\Controllers;
 
 use App\Controllers\Basecontroller;
-use Users\Models\UserModel;
+use Users\Models\UsersModel;
 use Users\Libraries\UsersLib;
 
 class Users extends BaseController {
