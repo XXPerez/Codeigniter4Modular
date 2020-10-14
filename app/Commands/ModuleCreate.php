@@ -321,7 +321,6 @@ class ".ucfirst($this->module_name)."Lib {
         $this->createDir('Database/Seeds', true);
         $this->createDir('Filters', true);
         $this->createDir('Language', true);
-        $this->createDir('Libraries', true);
         $this->createDir('Validation', true);
     }
     
@@ -373,9 +372,9 @@ class ".ucfirst($this->module_name)."Lib {
         $posline = 0;
 
         if (CLI::getOption('f')== '') {
-            $psr4Add = "\t\t'".ucfirst($this->module_name) . "' => ". 'APPPATH . ' ."'Modules\\" . ucfirst($this->module_name)."',";
+            $psr4Add = "                '".ucfirst($this->module_name) . "' => ". 'APPPATH . ' ."'Modules\\" . ucfirst($this->module_name)."',";
         } else {
-            $psr4Add = "\t\t'".ucfirst($this->module_name) . "' => ". 'ROOTPATH . ' . "'".$this->module_folderOrig."\\" . ucfirst($this->module_name)."',";
+            $psr4Add = "                '".ucfirst($this->module_name) . "' => ". 'ROOTPATH . ' . "'".$this->module_folderOrig."\\" . ucfirst($this->module_name)."',";
         }
         
         while (($buffer = fgets($file, 4096)) !== false) {
