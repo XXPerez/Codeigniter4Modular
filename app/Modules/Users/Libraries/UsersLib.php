@@ -1,4 +1,5 @@
 <?php
+
 namespace Users\Libraries;
 
 use Users\Models\UsersModel;
@@ -8,6 +9,7 @@ use CodeIgniter\HTTP\Response;
 class UsersLib {
 
     use UtilsResponseLib;
+
     public function __construct() {
         $config = config(App::class);
         $this->response = new Response($config);
@@ -24,7 +26,7 @@ class UsersLib {
         $request = \Config\Services::request();
         $rules = [
             'email' => 'required|min_length[6]|max_length[50]|valid_email',
-            'password' => 'required|min_length[8]|max_length[255]|validateUser[email,password]',
+            'password' => 'required|min_length[4]|max_length[255]|validateUser[email,password]',
         ];
         $errors = [
             'password' => [
@@ -38,11 +40,13 @@ class UsersLib {
         $validationErrors = $validation->getErrors();
 
         if (!empty($validationErrors)) {
+
             $data['validation'] = $validation;
             return $this->setResponse(UtilsResponseLib::$NOTALLOWED, $data);
         } else {
             $user = $this->getUserByEmail($request->getVar('email'));
             $this->setUserLogged($user);
+
             return $this->setResponse(UtilsResponseLib::$SUCCESS, $user);
         }
     }
@@ -52,8 +56,8 @@ class UsersLib {
         $rules = [
             'firstname' => 'required|min_length[3]|max_length[20]',
             'lastname' => 'required|min_length[3]|max_length[20]',
-            'email' => 'required|min_length[6]|max_length[50]|valid_email|is_unique[users.email]',
-            'password' => 'required|min_length[8]|max_length[255]',
+            'email' => 'required|min_length[6]|max_length[50]|valid_email|is_unique[xusers.email]',
+            'password' => 'required|min_length[4]|max_length[255]',
             'password_confirm' => 'matches[password]',
         ];
         $errors = [];
@@ -72,7 +76,8 @@ class UsersLib {
                 'firstname' => $request->getVar('firstname'),
                 'lastname' => $request->getVar('lastname'),
                 'email' => $request->getVar('email'),
-                'password' => $request->getVar('password'),
+                'useralias' => $request->getPost('useralias'),
+                'password' => $request->getVar('password')
             ];
             $data = $usersModel->save($newData);
             if ($data) {
@@ -90,6 +95,7 @@ class UsersLib {
         $rules = [
             'firstname' => 'required|min_length[3]|max_length[20]',
             'lastname' => 'required|min_length[3]|max_length[20]',
+            'useralias' => 'required|min_length[3]|max_length[50]'
         ];
         if ($request->getPost('password') != '') {
             $rules['password'] = 'required|min_length[8]|max_length[255]';
@@ -110,6 +116,7 @@ class UsersLib {
                 'id' => session()->get('id'),
                 'firstname' => $request->getPost('firstname'),
                 'lastname' => $request->getPost('lastname'),
+                'useralias' => $request->getPost('useralias')
             ];
             if ($request->getPost('password') != '') {
                 $newData['password'] = $request->getPost('password');
@@ -119,7 +126,7 @@ class UsersLib {
             $usersModel->save($newData);
             $user = $this->getUserById();
             $this->setUserLogged($user);
-            
+
             session()->setFlashdata('success', lang('Users.register.updated'));
             return $this->setResponse(UtilsResponseLib::$SUCCESS, $user);
         }
@@ -155,5 +162,4 @@ class UsersLib {
         return true;
     }
 
-           
 }

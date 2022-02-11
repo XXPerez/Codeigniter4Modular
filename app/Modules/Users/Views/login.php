@@ -1,6 +1,10 @@
 <?= $this->extend('layouts/general') ?>
 <?= $this->section('content') ?>
 <div class="container">
+    <div style="display:none">
+       <input type="password" tabindex="-1"/>
+       <input type="email" tabindex="-1"/>
+    </div
     <div class="row">
         <div class="col-12 col-sm-6 offset-sm-2 col-md-5 offset-md-3 mt-5 pt-3 pb-3 bg-white from-wrapper">
             <div class="container">
@@ -12,16 +16,17 @@
                     </div>
                 <?php endif; ?>
                 <form class="" action="<?=base_url()?>/login" method="post">
+                    <?= csrf_field() ?>
                     <div class="form-group">
                         <label for="email"><?=lang('Users.form.email')?></label>
-                        <input type="text" class="form-control" name="email" id="email" value="<?= set_value('email')?>">
+                        <input type="text" autocomplete="off" class="form-control" name="email" id="email" value="<?= set_value('email')?>"/>
                     </div>
                     <div class="form-group">
                         <label for="password"><?=lang('Users.form.password')?></label>
-                        <input type="password" class="form-control" name="password" id="password" value="">
+                        <input type="password" autocomplete="off" class="form-control" name="password" id="password" value=""/>
                     </div>
                     
-                    <?php if (isset($validation)) : ?>
+                    <?php if (isset($validation)) :  ?>
                     <div class="col-12">
                         <div class="alert alert-danger" role="alert">
                             <?= $validation->listErrors() ?>

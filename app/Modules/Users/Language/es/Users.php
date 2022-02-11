@@ -17,5 +17,6 @@ return [
     'form.new_user' => 'Nuevo usuario',
     'register.created' => 'Registro creado correctamente',
     'register.updated' => 'Registro actualizado',
-    'form.login.badlogin' => 'Email o password incorrecto'
+    'form.login.badlogin' => 'Email o password incorrecto',
+    'form.useralias' => 'Nombre de usuario o alias'
 ];

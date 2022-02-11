@@ -1,8 +1,7 @@
 <?php
 namespace Users\Controllers;
 
-use App\Controllers\Basecontroller;
-use Users\Models\UsersModel;
+use App\Controllers\BaseController;
 use Users\Libraries\UsersLib;
 
 class Users extends BaseController {
@@ -15,7 +14,7 @@ class Users extends BaseController {
 
     public function login() {
         if (session()->get('isLoggedIn')) {
-            return redirect()->to(base_url() . '/dashboard');
+            return redirect()->to(base_url() . '/');
         }
 
         $data = [];
@@ -23,12 +22,23 @@ class Users extends BaseController {
 
         if ($this->request->getMethod() == 'post') {
             $response = $this->usersLib->login();
+
             if ($response->status != \Utils\Libraries\UtilsResponseLib::$SUCCESS) {
-                $data = $response->error;
+                $data['validation'] = $response->error->validation;
             } else {
-                return redirect()->to(base_url() . '/dashboard');
+                $redirectUri = session()->getFlashdata('redirectUri');
+                if ($redirectUri != '') {
+                    return redirect()->to($redirectUri);
+                } else {
+                    return redirect()->to(base_url() . '/');
+                }
             }
         }
+        $redirectUri = session()->getFlashdata('redirectUri');
+        if ($redirectUri != '') {
+            session()->keepFlashdata('redirectUri');
+        }
+        
         return view('Users\Views\login', $data);
     }
 
@@ -38,13 +48,14 @@ class Users extends BaseController {
     }
 
     public function register() {
+
         $data = [];
         helper(['form']);
 
         if ($this->request->getMethod() == 'post') {
             $response = $this->usersLib->register();
             if ($response->status != \Utils\Libraries\UtilsResponseLib::$SUCCESS) {
-                $data = $response->error;
+                $data['validation'] = $response->error->validation;
             } else {
                 return redirect()->to(base_url() . '/login');
             }
@@ -60,11 +71,11 @@ class Users extends BaseController {
 
         if ($this->request->getMethod() == 'post') {
             if ($this->request->getVar('fmode') == 'cancel') {
-                return redirect()->to(base_url() . '/dashboard');
+                return redirect()->to(base_url() . '/');
             }
             $response = $this->usersLib->profile();
             if ($response->status != \Utils\Libraries\UtilsResponseLib::$SUCCESS) {
-                $data = $response->error;
+                $data['validation'] = $response->error->validation;
             } else {
                 return redirect()->to(base_url() . '/profile');
             }

@@ -6,7 +6,7 @@
             <div class="container">
                 <h3><?= $user->firstname.' '.$user->lastname?></h3>
                 <hr>
-                <form class="" action="<?=base_url()?>/profile" method="post">
+                <form class="" action="<?=base_url()?>/profile" method="POST">
                     <input name='fmode' id='fmode' value='update' type='hidden'>
                     <div class="row">
                         <div class="col-12 col-sm-6">
@@ -21,10 +21,16 @@
                                 <input type="text" class="form-control" name="lastname" id="lastname" value="<?= set_value('lastname', $user->lastname)?>">
                             </div>
                         </div>
-                        <div class="col-12">
+                        <div class="col-12  col-sm-6">
                             <div class="form-group">
                                 <label for="email"><?=lang('Users.form.email')?></label>
-                                <input type="text" readonly class="form-control" name="" id="email" value="<?= $user->email?>">
+                                <input type="text" readonly class="form-control" name="email" id="email" value="<?= $user->email?>">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label for="useralias"><?=lang('Users.form.useralias')?></label>
+                                <input type="text" class="form-control" name="useralias" id="useralias" value="<?= $user->useralias?>">
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 bg-light">

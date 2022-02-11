@@ -1,0 +1,9 @@
+
+Registrar players y partidas, con ID único asociado al email del usuario que ha creado la partida
+Poder acceder por url a la partida creada, pudiendo asignar partidos ganados/perdidos
+
+Poder acceder directament desde enlace del whats a dar por ganado/perdido un partido, y que se pueda generar el siguiente paso en partidas pozo
+
+Registrar los players, y que el creador, pueda asignarles email para que éstos puedan acceder directamente para apuntarse a un partido
+
+ 

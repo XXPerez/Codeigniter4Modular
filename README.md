@@ -9,10 +9,10 @@ The "Modular Structure" allows to separate each module from other, having each o
 
 | app | Modules | Module | Structure |
 | --- | ------- | ------ | --------- | 
-| app/ | Modules/ | Dashboard/ | Config/ | 
-| app/ | Modules/ | Dashboard/ | Controllers/ | 
-| app/ | Modules/ | Dashboard/ | Language/ | 
-| app/ | Modules/ | Dashboard/ | Views/ | 
+| app/ | Modules/ | Home/ | Config/ | 
+| app/ | Modules/ | Home/ | Controllers/ | 
+| app/ | Modules/ | Home/ | Language/ | 
+| app/ | Modules/ | Home/ | Views/ | 
 | app/ | Modules/ | Users/ | Config/ | 
 | app/ | Modules/ | Users/ | Controllers/ | 
 | app/ | Modules/ | Users/ | Database/ | 
@@ -22,6 +22,10 @@ The "Modular Structure" allows to separate each module from other, having each o
 | app/ | Modules/ | Users/ | Models/ | 
 | app/ | Modules/ | Users/ | Validation/ | 
 | app/ | Modules/ | Users/ | Views/ | 
+| app/ | Modules/ | Utils/ | Config/ | 
+| app/ | Modules/ | Utils/ | Controllers/ | 
+| app/ | Modules/ | Utils/ | Language/ | 
+| app/ | Modules/ | Utils/ | Libraries/ | 
 
 This repository holds a composer-installable app starter, with jQuery, Bootstrap4, and Login/Register fully working module examples
 It has been built from the 

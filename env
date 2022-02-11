@@ -14,13 +14,13 @@
 # ENVIRONMENT
 #--------------------------------------------------------------------
 
-# CI_ENVIRONMENT = production
+CI_ENVIRONMENT = development
 
 #--------------------------------------------------------------------
 # APP
 #--------------------------------------------------------------------
 
-# app.baseURL = ''
+app.baseURL = 'http://localhost/Codeigniter4-modular/public/'
 # app.forceGlobalSecureRequests = false
 
 # app.sessionDriver = 'CodeIgniter\Session\Handlers\FileHandler'
@@ -49,17 +49,20 @@
 # DATABASE
 #--------------------------------------------------------------------
 
-# database.default.hostname = localhost
-# database.default.database = ci4
-# database.default.username = root
-# database.default.password = root
-# database.default.DBDriver = MySQLi
+database.default.hostname = localhost
+database.default.database = ci4modular
+database.default.username = 
+database.default.password = 
+database.default.DBDriver = MySQLi
+database.default.port = 3306
 
-# database.tests.hostname = localhost
-# database.tests.database = ci4
-# database.tests.username = root
-# database.tests.password = root
-# database.tests.DBDriver = MySQLi
+#database.tests.hostname = localhost
+#database.tests.database = test
+#database.tests.DBPrefix = 
+#database.tests.username = 
+#database.tests.password = 
+#database.tests.DBDriver = MySQLi
+#database.tests.port = 3306
 
 #--------------------------------------------------------------------
 # CONTENT SECURITY POLICY
@@ -99,3 +102,12 @@
 # honeypot.name = 'honeypot'
 # honeypot.template = '<label>{label}</label><input type="text" name="{name}" value=""/>'
 # honeypot.container = '<div style="display:none">{template}</div>'
+
+#--------------------------------------------------------------------
+# LANGUAGE
+#--------------------------------------------------------------------
+app.defaultLocale = 'en'
+app.supportedLocales = ['en','ca','es']
+app.negotiateLocale = true
+app.appTimezone = 'Europe/Madrid'
+

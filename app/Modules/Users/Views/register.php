@@ -6,7 +6,8 @@
             <div class="container">
                 <h3><?=lang('Users.form.register_title')?></h3>
                 <hr>
-                <form class="" action="<?=base_url()?>/register" method="post">
+                <form id="registerForm" class="" action="<?=base_url()?>/register" method="post">
+                    <?= csrf_field() ?>
                     <div class="row">
                         <div class="col-12 col-sm-6">
                             <div class="form-group">
@@ -24,6 +25,12 @@
                             <div class="form-group">
                                 <label for="email"><?=lang('Users.form.email')?></label>
                                 <input type="text" class="form-control" name="email" id="email" value="<?= set_value('email')?>">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="useralias"><?=lang('Users.form.useralias')?></label>
+                                <input type="text" class="form-control" name="useralias" id="useralias" value="<?= set_value('useralias')?>">
                             </div>
                         </div>
                         <div class="col-12 col-sm-6">

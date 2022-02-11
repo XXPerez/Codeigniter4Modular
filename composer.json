@@ -2,7 +2,7 @@
 	"name": "xxperez/codeigniter4-modular",
 	"type": "project",
 	"description": "CodeIgniter4 modular starter app",
-        "version": "1.0.18",
+        "version": "1.2.02",
 	"homepage": "https://github.com/XXPerez/codeigniter4-modular",
 	"license": "MIT",
 	"require": {
@@ -10,9 +10,6 @@
 		"codeigniter4/framework": "^4"
 	},
 	"require-dev": {
-		"fzaninotto/faker": "^1.9@dev",
-		"mikey179/vfsstream": "1.6.*",
-		"phpunit/phpunit": "^8.5"
 	},
 	"autoload-dev": {
 		"psr-4": {
@@ -29,5 +26,10 @@
 		"forum": "http://forum.codeigniter.com/",
 		"source": "https://github.com/codeigniter4/CodeIgniter4",
 		"slack": "https://codeigniterchat.slack.com"
-	}
+	},
+         "config": {
+            "github-oauth": {
+              "github.com": "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"
+            }
+        }
 }

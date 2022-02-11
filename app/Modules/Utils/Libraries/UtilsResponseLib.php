@@ -14,12 +14,16 @@ trait UtilsResponseLib {
     
     protected function sendResponse($status, $data = null) {
         $myresponse = $this->setResponse($status, $data);
-        return $this->respond((object) $myresponse)->send();
+        $this->respond((object) $myresponse)->send();
+        die();
     }
             
     protected function setResponse($status, $data = null) {
         
         $myresponse = new \stdClass();
+        if (is_array($data)) {
+            $data = (object) $data;
+        }
         if ($status == self::$SUCCESS) {
             $myresponse->status = $status;
             $myresponse->data = $data;
