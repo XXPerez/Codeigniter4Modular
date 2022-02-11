@@ -13,6 +13,7 @@ The "Modular Structure" allows to separate each module from other, having each o
 | app/ | Modules/ | Home/ | Controllers/ | 
 | app/ | Modules/ | Home/ | Language/ | 
 | app/ | Modules/ | Home/ | Views/ | 
+
 | app/ | Modules/ | Users/ | Config/ | 
 | app/ | Modules/ | Users/ | Controllers/ | 
 | app/ | Modules/ | Users/ | Database/ | 
@@ -22,6 +23,7 @@ The "Modular Structure" allows to separate each module from other, having each o
 | app/ | Modules/ | Users/ | Models/ | 
 | app/ | Modules/ | Users/ | Validation/ | 
 | app/ | Modules/ | Users/ | Views/ | 
+
 | app/ | Modules/ | Utils/ | Config/ | 
 | app/ | Modules/ | Utils/ | Controllers/ | 
 | app/ | Modules/ | Utils/ | Language/ | 
