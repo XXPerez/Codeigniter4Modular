@@ -75,7 +75,7 @@ copy env .env
 Edit .env, and tailor for your app, specifically the baseURL
 and default database settings:
 ```sh
-app.baseURL = 'http://localhost/codeigniter4-modular'
+app.baseURL = 'http://localhost/codeigniter4-modular/public'
 
 database.default.hostname = localhost
 database.default.database = database

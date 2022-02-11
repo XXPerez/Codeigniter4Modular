@@ -1,7 +1,7 @@
 <?php
 namespace App\Database\Migrations;
 
-class AddUsers extends \CodeIgniter\Database\Migration {
+class CreateUsers extends \CodeIgniter\Database\Migration {
 
     public function up() {
         $this->forge->addField([
@@ -19,6 +19,10 @@ class AddUsers extends \CodeIgniter\Database\Migration {
                 'constraint' => '50',
             ],
             'email' => [
+                'type' => 'VARCHAR',
+                'constraint' => '50',
+            ],
+            'useralias' => [
                 'type' => 'VARCHAR',
                 'constraint' => '50',
             ],
