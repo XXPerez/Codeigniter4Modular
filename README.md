@@ -43,7 +43,7 @@ The user guide corresponding to this version of the framework can be found
 Go to a browsable directory (Example: c:\xampp\htdocs)
 
 ```sh
-composer create-project xxperez/codeigniter4-modular
+composer create-project xxperez/Codeigniter4Modular
 ```
 then 
 ```sh
