@@ -56,7 +56,7 @@ class UsersLib {
         $rules = [
             'firstname' => 'required|min_length[3]|max_length[20]',
             'lastname' => 'required|min_length[3]|max_length[20]',
-            'email' => 'required|min_length[6]|max_length[50]|valid_email|is_unique[xusers.email]',
+            'email' => 'required|min_length[6]|max_length[50]|valid_email|is_unique[users.email]',
             'password' => 'required|min_length[4]|max_length[255]',
             'password_confirm' => 'matches[password]',
         ];

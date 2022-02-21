@@ -20,7 +20,7 @@ CI_ENVIRONMENT = development
 # APP
 #--------------------------------------------------------------------
 
-app.baseURL = 'http://localhost/Codeigniter4-modular/public/'
+app.baseURL = 'https://localhost/workspace/XAmaPadel/CI4/public/'
 # app.forceGlobalSecureRequests = false
 
 # app.sessionDriver = 'CodeIgniter\Session\Handlers\FileHandler'
@@ -49,20 +49,20 @@ app.baseURL = 'http://localhost/Codeigniter4-modular/public/'
 # DATABASE
 #--------------------------------------------------------------------
 
-database.default.hostname = localhost
-database.default.database = ci4modular
-database.default.username = 
-database.default.password = 
+database.default.hostname = 127.0.0.1
+database.default.database = ci4
+database.default.username = root
+database.default.password = root
 database.default.DBDriver = MySQLi
-database.default.port = 3306
+database.default.port = 3311
 
 #database.tests.hostname = localhost
 #database.tests.database = test
 #database.tests.DBPrefix = 
-#database.tests.username = 
-#database.tests.password = 
+#database.tests.username = root
+#database.tests.password = root
 #database.tests.DBDriver = MySQLi
-#database.tests.port = 3306
+#database.tests.port = 3311
 
 #--------------------------------------------------------------------
 # CONTENT SECURITY POLICY
@@ -106,8 +106,8 @@ database.default.port = 3306
 #--------------------------------------------------------------------
 # LANGUAGE
 #--------------------------------------------------------------------
-app.defaultLocale = 'en'
-app.supportedLocales = ['en','ca','es']
+app.defaultLocale = 'es'
+app.supportedLocales = ['es','en']
 app.negotiateLocale = true
 app.appTimezone = 'Europe/Madrid'
 

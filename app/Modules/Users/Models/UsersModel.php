@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class UsersModel extends Model {
 
-    protected $table = 'xusers';
+    protected $table = 'users';
     protected $primaryKey = 'id';
     protected $returnType = 'object';
     protected $useSoftDeletes = false;
