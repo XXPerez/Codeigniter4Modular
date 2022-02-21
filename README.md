@@ -43,11 +43,11 @@ The user guide corresponding to this version of the framework can be found
 Go to a browsable directory (Example: c:\xampp\htdocs)
 
 ```sh
-composer create-project xxperez/codeigniter4-modular
+composer create-project xxperez/Codeigniter4Modular
 ```
 then 
 ```sh
-cd codeigniter4-modular
+cd Codeigniter4Modular
 ``` 
 
 ## Updates 
@@ -62,9 +62,9 @@ to your `app` folder. The affected files can be copied or merged from
 
 ## Setup
 
-Go to codeigniter4-modular directory.
+Go to Codeigniter4Modular directory.
 ```sh
-cd codeigniter4-modular
+cd Codeigniter4Modular
 ``` 
 
 Copy `env` to `.env`: 
