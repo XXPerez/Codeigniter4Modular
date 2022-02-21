@@ -64,7 +64,7 @@ to your `app` folder. The affected files can be copied or merged from
 
 Go to codeigniter4-modular directory.
 ```sh
-cd codeigniter4-modular
+cd Codeigniter4Modular
 ``` 
 
 Copy `env` to `.env`: 
