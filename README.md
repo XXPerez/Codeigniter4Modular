@@ -43,11 +43,11 @@ The user guide corresponding to this version of the framework can be found
 Go to a browsable directory (Example: c:\xampp\htdocs)
 
 ```sh
-composer create-project xxperez/Codeigniter4Modular
+composer create-project xxperez/codeigniter4modular
 ```
 then 
 ```sh
-cd Codeigniter4Modular
+cd codeigniter4modular
 ``` 
 
 ## Updates 
@@ -64,7 +64,7 @@ to your `app` folder. The affected files can be copied or merged from
 
 Go to Codeigniter4Modular directory.
 ```sh
-cd Codeigniter4Modular
+cd codeigniter4modular
 ``` 
 
 Copy `env` to `.env`: 
@@ -75,7 +75,7 @@ copy env .env
 Edit .env, and tailor for your app, specifically the baseURL
 and default database settings:
 ```sh
-app.baseURL = 'http://localhost/codeigniter4-modular/public'
+app.baseURL = 'http://localhost/codeigniter4modular/public'
 
 database.default.hostname = localhost
 database.default.database = database
@@ -105,7 +105,7 @@ app.appTimezone = 'America/Chicago'
 
 Now, you can test the app, browse your installed directory, click on "Login" in the main page. 
 
-http://localhost/codeigniter4-modular
+http://localhost/codeigniter4modular
 
 
 ### More about modular configuration
