@@ -109,15 +109,15 @@ http://localhost/codeigniter4modular
 
 
 ### More about modular configuration
-All modules will reside under /app/Modules, but can be allocated elsewhere. 
+All modules will reside under /Modules, but can be allocated elsewhere. 
 When your create a module, edit /app/Config/Autoload.php and add your module to the PSR4, to be able to be found.
 ```php
 	public $psr4 = [
             APP_NAMESPACE => APPPATH, // For custom app namespace
             'Config'      => APPPATH . 'Config',
             APP_NAMESPACE.'\Controllers' => APPPATH.'Controllers',
-            'Dashboard' => APPPATH . 'Modules\Dashboard' ,
-            'Users' => APPPATH . 'Modules\Users' ,
+            'Dashboard' => APPPATH . '../Modules\Dashboard' ,
+            'Users' => APPPATH . '../Modules\Users' ,
 	];
 ```
 
