@@ -7,27 +7,27 @@ More information can be found at the [official site](http://codeigniter.com).
 
 The "Modular Structure" allows to separate each module from other, having each one, controllers, database, filters, libraries, languages, models, routes, validations and views.   
 
-| app | Modules | Module | Structure |
-| --- | ------- | ------ | --------- | 
-| app/ | Modules/ | Home/ | Config | 
-|  |  |  | Controllers | 
-|  |  |  | Language | 
-|  |  |  | Views | 
-|  |  |  |  | 
-| app/ | Modules/ | Users/ | Config | 
-|  |  |  | Controllers | 
-|  |  |  | Database | 
-|  |  |  | Filters | 
-|  |  |  | Language | 
-|  |  |  | Libraries | 
-|  |  |  | Models | 
-|  |  |  | Validation | 
-|  |  |  | Views | 
-|  |  |  |  | 
-| app/ | Modules/ | Utils/ | Config | 
-|  |  |  | Controllers | 
-|  |  |  | Language | 
-|  |  |  | Libraries | 
+| Modules | Module | Structure |
+| ------- | ------ | --------- | 
+| Modules/ | Home/ | Config | 
+|  |  | Controllers | 
+|  |  | Language | 
+|  |  | Views | 
+|  |  |  | 
+| Modules/ | Users/ | Config | 
+|  |  | Controllers | 
+|  |  | Database | 
+|  |  | Filters | 
+|  |  | Language | 
+|  |  | Libraries | 
+|  |  | Models | 
+|  |  | Validation | 
+|  |  | Views | 
+|  |  |  | 
+| Modules/ | Utils/ | Config | 
+|  |  | Controllers | 
+|  |  | Language | 
+|  |  | Libraries | 
 
 This repository holds a composer-installable app starter, with jQuery, Bootstrap4, and Login/Register fully working module examples
 It has been built from the 
